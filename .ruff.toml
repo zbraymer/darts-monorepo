@@ -1,0 +1,27 @@
+line-length = 100
+target-version = "py311"
+
+[lint]
+
+select = ["ALL", "D101", "D102", "D103", "D106", "D107", "D419"]
+
+ignore = [
+    "B008", "C901", "W191", "PD008", "PD901", "D", "ANN", "INP001", "S106", "EM", "TRY003", "I001",
+    "COM812", "S603", "S104", "S607", "RUF012", "TCH002", "TID252", "TRY004", "TD", "FIX002",
+    ]
+
+fixable = ["ALL"]
+unfixable = ["B"]
+
+[lint.per-file-ignores]
+"__init__.py" = ["F401"]
+"**/tests/*.py" = ["D", "PLR2004", "S101"]
+"external/**" = ["ALL"]
+"experimental/**" = ["ALL"]
+"frontend/**" = ["ALL"]
+
+[lint.pylint]
+max-args = 7
+
+[lint.flake8-builtins]
+builtins-ignorelist = ["id"]
