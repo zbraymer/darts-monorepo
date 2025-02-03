@@ -17,7 +17,8 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build Docker Image
-        run: docker build -t dart-scoring-backend:latest .
+        run: docker build -t dart-scoring-backend:latest -f backend/Dockerfile ./backend/
+
 
       - name: Setup SSH Connection
         uses: webfactory/ssh-agent@v0.8.0
