@@ -15,8 +15,8 @@ jobs:
 
       - name: Set up Docker
         run: |
-          sudo apt-get update
-          sudo apt-get install -y docker.io
+          echo "${{ secrets.PI_SUDO_PASSWORD }}" | sudo -S apt-get update
+          echo "${{ secrets.PI_SUDO_PASSWORD }}" | sudo -S apt-get install -y docker.io
 
       - name: Build and Run Docker Container
         run: |
