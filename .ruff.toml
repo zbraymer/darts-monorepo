@@ -17,7 +17,7 @@ unfixable = ["B"]
 "__init__.py" = ["F401"]
 "**/tests/*.py" = ["D", "PLR2004", "S101"]
 "external/**" = ["ALL"]
-"experimental/**" = ["ALL"]
+"backend/**" = ["ALL"]
 "frontend/**" = ["ALL"]
 
 [lint.pylint]
