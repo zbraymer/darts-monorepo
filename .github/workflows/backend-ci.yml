@@ -27,8 +27,8 @@ jobs:
       - name: Install Dependencies
         run: |
           pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install -r dev-requirements.txt  # Ensure this includes Ruff, Pytest, and Coverage
+          pip install -r ./backend/app/requirements.txt
+          pip install -r ./backend/app/dev-requirements.txt  # Ensure this includes Ruff, Pytest, and Coverage
 
       - name: Run Ruff Linter
         run: ruff check .

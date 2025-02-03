@@ -33,7 +33,6 @@ jobs:
           docker stop dart-scoring-backend || true
           docker rm dart-scoring-backend || true
           docker run -d --restart unless-stopped -p 8000:8000 --name dart-scoring-backend dart-scoring-backend:latest
-        EOF
 
       - name: Wait for Backend to Start
         run: sleep 5
