@@ -24,6 +24,10 @@ jobs:
         uses: webfactory/ssh-agent@v0.8.0
         with:
           ssh-private-key: ${{ secrets.PI_SSH_SECRET_KEY }}
+          
+      - name: Keep SSH session open for debugging
+        if: failure()
+        run: sleep 600  # Keeps the runner alive for 10 minutes
 
       - name: Copy Docker Image to Raspberry Pi
         run: |
