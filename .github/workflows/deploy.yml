@@ -27,10 +27,10 @@ jobs:
 
       - name: Copy Docker Image to Raspberry Pi
         run: |
-          docker save dart-scoring-backend:latest | ssh -o StrictHostKeyChecking=no pi@192.168.1.100 "docker load"
+          docker save dart-scoring-backend:latest | ssh -o StrictHostKeyChecking=no zachraymer@raspberrypi.local "docker load"
 
       - name: Restart Docker Container on Raspberry Pi
-        run: ssh -o StrictHostKeyChecking=no pi@192.168.1.100 << 'EOF'
+        run: ssh -o StrictHostKeyChecking=no zachraymer@raspberrypi.local << 'EOF'
           docker stop dart-scoring-backend || true
           docker rm dart-scoring-backend || true
           docker run -d --restart unless-stopped -p 8000:8000 --name dart-scoring-backend dart-scoring-backend:latest
@@ -40,8 +40,8 @@ jobs:
 
       - name: Health Check
         run: |
-          curl --fail http://192.168.1.100:8000/health || (echo "❌ Backend Health Check Failed" && exit 1)
+          curl --fail http://raspberrypi.local:8000/health || (echo "❌ Backend Health Check Failed" && exit 1)
 
       - name: Fetch Logs on Failure
         if: failure()
-        run: ssh -o StrictHostKeyChecking=no pi@192.168.1.100 "docker logs dart-scoring-backend"
+        run: ssh -o StrictHostKeyChecking=no zachraymer@raspberrypi.local "docker logs dart-scoring-backend"
