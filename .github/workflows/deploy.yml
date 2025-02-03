@@ -1,4 +1,4 @@
-name: Deploy to Raspberry Pi
+name: Deploy to Raspberry Pi (Self-Hosted)
 
 on:
   push:
@@ -7,45 +7,29 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted
+    runs-on: self-hosted  # Runs directly on the Raspberry Pi
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Set up Docker
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build Docker Image
-        run: docker build -t dart-scoring-backend:latest -f backend/Dockerfile ./backend/
-
-
-      - name: Setup SSH Connection
-        uses: webfactory/ssh-agent@v0.8.0
-        with:
-          ssh-private-key: ${{ secrets.PI_SSH_SECRET_KEY }}
-
-      - name: Keep SSH session open for debugging
-        if: failure()
-        run: sleep 600  # Keeps the runner alive for 10 minutes
-
-      - name: Copy Docker Image to Raspberry Pi
         run: |
-          docker save dart-scoring-backend:latest | ssh -o StrictHostKeyChecking=no zachraymer@192.168.68.146 "docker load"
+          sudo apt-get update
+          sudo apt-get install -y docker.io
 
-      - name: Restart Docker Container on Raspberry Pi
-        run: ssh -o StrictHostKeyChecking=no zachraymer@192.168.68.146 << 'EOF'
+      - name: Build and Run Docker Container
+        run: |
+          docker build -t dart-scoring-backend:latest -f backend/Dockerfile ./backend/
           docker stop dart-scoring-backend || true
           docker rm dart-scoring-backend || true
           docker run -d --restart unless-stopped -p 8000:8000 --name dart-scoring-backend dart-scoring-backend:latest
 
-      - name: Wait for Backend to Start
-        run: sleep 5
-
       - name: Health Check
         run: |
-          curl --fail http://192.168.68.146:8000/health || (echo "❌ Backend Health Check Failed" && exit 1)
+          sleep 5
+          curl --fail http://localhost:8000/health || (echo "❌ Backend Health Check Failed" && exit 1)
 
       - name: Fetch Logs on Failure
         if: failure()
-        run: ssh -o StrictHostKeyChecking=no zachraymer@192.168.68.146 "docker logs dart-scoring-backend"
+        run: docker logs dart-scoring-backend
