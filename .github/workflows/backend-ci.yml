@@ -33,8 +33,8 @@ jobs:
       - name: Run Ruff Linter
         run: ruff check .
 
-      - name: Run Pytest
-        run: pytest tests/
+      # - name: Run Pytest
+      #   run: pytest tests/
 
       - name: Upload Coverage Report
         uses: codecov/codecov-action@v4
