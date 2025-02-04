@@ -1,7 +1,20 @@
 import app.constants as c
+from app.schemas import Throw, ThrowScore
 
 
 def map_angle_to_segment(angle):
+    """_summary_
+
+    Parameters
+    ----------
+    angle : float
+        Angle in radians of throw of single dart.
+
+    Returns
+    -------
+    int
+        Zone that angle maps to.
+    """
     # Define the dartboard segments in their correct order
     segments = [6, 13, 4, 18, 1, 20, 5, 12, 9, 14, 11, 8, 16, 7, 19, 3, 17, 2, 15, 10]
     segment_angle = 360 / 20  # Each segment spans 18 degrees
@@ -14,8 +27,21 @@ def map_angle_to_segment(angle):
     return segments[segment_index]
 
 
-def calculate_score(radius: float, angle: float):
-    angle = (angle + 360) % 360  # Adjust angle to [0, 360)
+def calculate_score(throw: Throw):
+    """function to calculate score of a single dart
+
+    Parameters
+    ----------
+    throw : Throw
+        Radius and angle of a given dart throw.
+
+    Returns
+    -------
+    dict
+        dictionary of the multiplier, zone, and score
+    """
+    angle = (throw.angle + 360) % 360  # Adjust angle to [0, 360)
+    radius = throw.radius
 
     # Define scoring zones
     if radius <= c.INNER_BULL_RADIUS:
@@ -38,8 +64,8 @@ def calculate_score(radius: float, angle: float):
         return {"zone": "Miss", "score": 0}
 
     # Otherwise, it's a single score
-    return {
-        "multiplier": c.INGLE,
-        "zone": map_angle_to_segment(angle),
-        "score": map_angle_to_segment(angle) * c.SINGLE,
-    }
+    return ThrowScore(
+        multiplier=c.SINGLE,
+        zone=map_angle_to_segment(angle),
+        score=map_angle_to_segment(angle) * c.SINGLE,
+    )
