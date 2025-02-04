@@ -11,10 +11,10 @@ class AroundTheWorldGame:
     ----------
     mode : str
         The game mode, which determines the required hit type ("single", "double", "triple").
-    darts_per_turn : int
-        The number of darts thrown per turn.
     current_target : int
         The current number the player needs to hit (starts at 1 and ends at 20).
+    throw_count : int
+        The total number of throws taken.
     is_complete : bool
         Indicates whether the game has been completed.
     """
@@ -27,7 +27,6 @@ class AroundTheWorldGame:
         ----------
         mode : str, optional
             The game mode, either "single", "double", or "triple" (default is "single").
-
         """
         if mode not in {"single", "double", "triple"}:
             raise ValueError("Invalid mode. Must be 'single', 'double', or 'triple'.")
@@ -54,19 +53,16 @@ class AroundTheWorldGame:
         if self.is_complete:
             return {"message": "Game is already completed.", "current_target": self.current_target}
 
-        # Check if the required target was hit in any throw
         for throw in throws.throws:
             score = calculate_score(throw)
             self.throw_count += 1
 
             if (score.multiplier == self.mode) and (score.zone == self.current_target):
-                self.current_target += 1
+                self.current_target += 1  # Advance immediately if the target is hit
 
             if self.current_target > c.TWENTY:
                 self.is_complete = True
-                return {"message": "Game Complete"}
-
-            # TODO Need to understand how to process sequential hits from a throw target perspective
+                return {"message": "Game Complete", "current_target": 20}
 
         return {"message": "Turn processed.", "current_target": self.current_target}
 
