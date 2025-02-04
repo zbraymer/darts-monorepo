@@ -10,6 +10,10 @@ jobs:
     runs-on: self-hosted  # Runs directly on the Raspberry Pi
 
     steps:
+      - name: Ensure Deployment Only on Main Branch
+        if: github.ref != 'refs/heads/main'
+        run: echo "Not on main branch. Exiting." && exit 0
+        
       - name: Checkout Repository
         uses: actions/checkout@v4
 
