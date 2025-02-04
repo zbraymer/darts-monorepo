@@ -13,10 +13,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up Docker
-        run: |
-          echo "${{ secrets.PI_SUDO_PASSWORD }}" | sudo -S apt-get update
-          echo "${{ secrets.PI_SUDO_PASSWORD }}" | sudo -S apt-get install -y docker.io
+      # Might need to add back install of docker if you want to deploy elsewhere
 
       - name: Build and Run Docker Container
         run: |
