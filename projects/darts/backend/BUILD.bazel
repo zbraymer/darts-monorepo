@@ -3,7 +3,7 @@ load("//python:rules.bzl", "py_library")
 
 py_library(
     name = "darts",
-    srcs = glob(["darts/*.py"]),
+    srcs = glob(["backend/*.py"]),
     imports = ["."],
     visibility = ["//visibility:public"],
     deps = [requirement("fastapi"),
