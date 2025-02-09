@@ -25,8 +25,3 @@ repos:
         language: system
         entry: bazel run //:format
         files: .*
-  - repo: https://github.com/keith/pre-commit-buildifier
-    rev: 7.3.1
-    hooks:
-    -   id: buildifier
-    -   id: buildifier-lint
