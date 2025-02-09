@@ -11,45 +11,19 @@ on:
       - develop
 
 jobs:
-  backend:
-    name: Backend Tests
-    runs-on: ubuntu-latest
-
+  build_and_test:
+    runs-on: [self-hosted, bazel, dlg-dev]
     steps:
-      - name: Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Get Bazel
+        uses: bazel-contrib/setup-bazel@0.8.2
         with:
-          python-version: "3.12"
-
-      - name: Install Dependencies
-        run: |
-          pip install --upgrade pip
-          pip install -r ./backend/requirements.txt
-          pip install -r ./backend/dev-requirements.txt  # Ensure this includes Ruff, Pytest, and Coverage
-
-      - name: Run Ruff Linter
-        run: ruff check .
-
-      - name: Run Pytest with Coverage
-        run: |
-          pytest --cov=your_package --cov-report=xml --cov-report=term || echo "No tests found, skipping coverage."
-
-      - name: Check for Coverage File
-        run: |
-          if [ -f coverage.xml ]; then
-            echo "✅ Coverage file found, proceeding with Codecov upload."
-          else
-            echo "⚠️ No coverage file found, skipping Codecov upload."
-            exit 0
-          fi
-
-      - name: Upload Coverage Report (if exists)
-        if: success()
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          fail_ci_if_error: false  # Prevents workflow from failing if no coverage is found
-          files: ./coverage.xml
+          bazelisk-cache: true
+          repository-cache: true
+      - name: Write CI Bazel Options
+        run: bash sh/bazel/write_ci_config_options.sh
+      - name: Bazel Test
+        run: bazel test --test_tag_filters="-ci-skip" --test_output=errors //...
+      - name: Format Check
+        run: bazel run //rules/format:format.check
