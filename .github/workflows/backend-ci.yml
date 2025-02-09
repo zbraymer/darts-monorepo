@@ -12,7 +12,7 @@ on:
 
 jobs:
   build_and_test:
-    runs-on: [self-hosted, bazel]
+    runs-on: [self-hosted]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
