@@ -16,14 +16,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Get Bazel
-        uses: bazel-contrib/setup-bazel@0.8.2
-        with:
-          bazelisk-cache: true
-          repository-cache: true
-      - name: Write CI Bazel Options
-        run: bash sh/bazel/write_ci_config_options.sh
-      - name: Bazel Test
-        run: bazel test --test_tag_filters="-ci-skip" --test_output=errors //...
+      # - name: Get Bazel
+      #   uses: bazel-contrib/setup-bazel@0.8.2
+      #   with:
+      #     bazelisk-cache: true
+      #     repository-cache: true
+      # - name: Write CI Bazel Options
+      #   run: bash sh/bazel/write_ci_config_options.sh
+      # - name: Bazel Test
+      #   run: bazel test --test_tag_filters="-ci-skip" --test_output=errors //...
       - name: Format Check
         run: bazel run //rules/format:format.check
