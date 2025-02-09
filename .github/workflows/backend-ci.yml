@@ -11,18 +11,33 @@ on:
       - develop
 
 jobs:
-  build_and_test:
-    runs-on: [self-hosted]
+  bazel:
+    runs-on: self-hosted  # Runs on your Raspberry Pi
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
-      # - name: Get Bazel
-      #   uses: bazel-contrib/setup-bazel@0.8.2
-      #   with:
-      #     bazelisk-cache: true
-      #     repository-cache: true
-      # - name: Write CI Bazel Options
-      #   run: bash sh/bazel/write_ci_config_options.sh
+
+      - name: Ensure Bazel 7.4.1 is Installed
+        run: |
+          if [[ "$(bazel version | grep 'Bazel 7.4.1')" == "" ]]; then
+            echo "Bazel version mismatch! Expected 7.4.1."
+            exit 1
+          fi
+
+      - name: Set up Bazel cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/bazel
+          key: bazel-${{ runner.os }}-${{ github.sha }}
+          restore-keys: |
+            bazel-${{ runner.os }}-
+
+      - name: Build with Bazel 7.4.1
+        run: bazel build //...
+
+      - name: Run Tests with Bazel 7.4.1
+        run: bazel test //...
       # - name: Bazel Test
       #   run: bazel test --test_tag_filters="-ci-skip" --test_output=errors //...
       - name: Format Check
