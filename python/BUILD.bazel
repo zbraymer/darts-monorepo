@@ -1,0 +1,19 @@
+load("@aspect_rules_py//py:defs.bzl", "py_pytest_main")
+load("@pip//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+load("@rules_uv//uv:pip.bzl", compile_pip_requirements = "pip_compile")
+
+exports_files(
+    [
+        "pytest.ini",
+        "requirements.txt.lock",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+compile_pip_requirements(
+    name = "requirements",
+    requirements_in = "requirements.txt",
+    requirements_txt = "requirements.txt.lock",
+    visibility = ["__pkg__"],
+)

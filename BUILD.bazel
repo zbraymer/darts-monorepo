@@ -1,0 +1,10 @@
+exports_files([
+    ".ruff.toml",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "format",
+    actual = "//rules/format",
+)

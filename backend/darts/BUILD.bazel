@@ -1,0 +1,14 @@
+load("@pip//:requirements.bzl", "requirement")
+load("//python:rules.bzl", "py_library")
+
+py_library(
+    name = "darts",
+    srcs = glob(["darts/*.py"]),
+    imports = ["."],
+    visibility = ["//visibility:public"],
+    deps = [requirement("fastapi"),
+    requirement("requests"),
+    requirement("pydantic"),
+
+    ],
+)

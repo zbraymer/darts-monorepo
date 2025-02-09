@@ -1,0 +1,12 @@
+load("@pip//:requirements.bzl", "requirement")
+load("@rules_pyvenv//:venv.bzl", "py_venv")
+
+py_venv(
+    name = "env",
+    deps = [
+        "//backend/darts:darts",
+        requirement("ipykernel"),
+        requirement("jupyterlab"),
+
+    ],
+)
