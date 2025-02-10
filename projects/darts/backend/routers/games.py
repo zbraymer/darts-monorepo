@@ -1,4 +1,6 @@
 class AroundTheWorldGame:
+    """Class to track the playing of a game of Around the World"""
+
     def __init__(self, mode: str, darts_per_target: int):
         """
         Initialize the game.
