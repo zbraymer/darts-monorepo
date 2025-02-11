@@ -19,11 +19,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Ensure Bazel 7.4.1 is Installed
-        run: BAZEL_VERSION=$(bazel version | awk '/Build label/ {print $3}')
-              if [[ "$BAZEL_VERSION" != "7.4.1" ]]; then
-                echo "Expected Bazel version 7.4.1, but found $BAZEL_VERSION"
-                exit 1
-              fi
+        run: bash sh/bazel_build_version_check.sh
+
 
       - name: Set up Bazel cache
         uses: actions/cache@v4
