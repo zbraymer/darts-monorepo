@@ -23,7 +23,7 @@ def py_binary(name, srcs, **kwargs):
 
 
 def pytest_test(name, srcs, deps, **kwargs):
-    srcs.append("//py:__test__")
+    srcs.append("//python:__test__")
 
     if "@pip//pytest:pkg" not in deps:
         deps.append("@pip//pytest:pkg")
