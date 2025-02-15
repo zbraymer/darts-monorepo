@@ -1,3 +1,4 @@
+"""Rules for python envs and testing"""
 load("@aspect_rules_py//py:defs.bzl", "py_test")
 load("@rules_python//python:defs.bzl", _py_binary = "py_binary", _py_library = "py_library")
 load("@rules_pyvenv//:venv.bzl", _py_venv = "py_venv")
