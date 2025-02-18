@@ -2,7 +2,7 @@
 FROM python:3.12-slim
 
 # Set environment variables to prevent Python from buffering output
-ENV PYTHONUNBUFFERED=1 
+ENV PYTHONUNBUFFERED=1
 
 # Set the working directory inside the container
 WORKDIR /app
