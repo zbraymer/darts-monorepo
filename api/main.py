@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routers.scores import router as game_router
+from .routers import game_router
 
 app = FastAPI()
 

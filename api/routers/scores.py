@@ -1,6 +1,5 @@
 from fastapi import APIRouter
-from .. import schemas
-from ..utils.scoring import calculate_score
+from darts.utils.scoring import calculate_score
 
 router = APIRouter()
 

@@ -1,0 +1,44 @@
+.
+├── DESIGN.md
+├── LICENSE
+├── README.md
+├── main.py
+├── projects
+│   ├── darts
+│   │   └── backend
+│   │       ├── Dockerfile
+│   │       ├── api
+│   │       │   ├── README.md
+│   │       │   ├── __init__.py
+│   │       │   ├── main.py
+│   │       │   ├── pyproject.toml
+│   │       │   ├── routers
+│   │       │   │   ├── __init__.py
+│   │       │   │   └── scores.py
+│   │       │   └── tests
+│   │       ├── darts
+│   │       │   ├── README.md
+│   │       │   ├── __init__.py
+│   │       │   ├── constants.py
+│   │       │   ├── games
+│   │       │   │   ├── __init__.py
+│   │       │   │   └── atw.py
+│   │       │   ├── main.py
+│   │       │   ├── pyproject.toml
+│   │       │   ├── schemas.py
+│   │       │   ├── tests
+│   │       │   └── utils
+│   │       │       ├── __init__.py
+│   │       │       └── scoring.py
+│   │       ├── main.py
+│   │       ├── notebooks
+│   │       │   ├── Untitled.ipynb
+│   │       │   ├── aroundtheworld.ipynb
+│   │       │   └── testing.ipynb
+│   │       └── pyproject.toml
+│   └── other
+├── pyproject.toml
+├── tree.txt
+└── uv.lock
+
+13 directories, 29 files
