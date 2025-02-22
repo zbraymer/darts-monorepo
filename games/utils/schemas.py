@@ -1,22 +1,26 @@
-from pydantic import BaseModel
+from dataclasses import dataclass
 
 
-class Throw(BaseModel):
+@dataclass
+class Throw:
     radius: float
     angle: float
 
 
-class ThrowTriplet(BaseModel):
+@dataclass
+class ThrowTriplet:
     target: str
     throws: list[Throw]
 
 
-class GameCreate(BaseModel):
+@dataclass
+class GameCreate:
     mode: str
     darts_per_target: int
 
 
-class GameStatus(BaseModel):
+@dataclass
+class GameStatus:
     current_target: int
     completed_targets: list[int]
     throws: list[ThrowTriplet]

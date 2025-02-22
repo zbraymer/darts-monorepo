@@ -1,4 +1,4 @@
-from .. import constants as c
+from .utils import constants as c
 
 
 def map_angle_to_segment(angle):
