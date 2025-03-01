@@ -13,4 +13,7 @@ dependencies = [
 ]
 
 [tool.uv.sources]
-games = { path = "games", editable = true }
+games = { workspace = true }
+
+[tool.uv.workspace]
+members = ["games"]

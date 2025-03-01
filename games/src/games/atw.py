@@ -1,4 +1,11 @@
+from games.utils import constants as c
+
+
 class AroundTheWorld:
+    """
+    Class to handle playing around the world.
+    """
+
     def __init__(self, mode: str, darts_per_target: int):
         """
         Initialize the game.
@@ -44,15 +51,12 @@ class AroundTheWorld:
         required_multiplier = {"singles": 1, "doubles": 2, "triples": 3}[self.mode]
         if target == self.current_target and multiplier == required_multiplier:
             self.current_target_hits += 1
-            print(f"Hit! {self.mode.capitalize()} {target} achieved.")
         else:
-            print(f"Missed! Current target is {self.current_target}.")
             return False
 
         # Check if the target is complete
         if self.current_target_hits >= self.darts_per_target:
             self.completed_targets[self.current_target] = self.total_throws
-            print(f"Target {self.current_target} complete after {self.total_throws} throws!")
             self.current_target += 1
             self.current_target_hits = 0  # Reset hits for the next target
 
@@ -67,7 +71,7 @@ class AroundTheWorld:
         bool
             True if all targets are completed, False otherwise.
         """
-        return self.current_target > 20
+        return self.current_target > c.TWENTY
 
     def get_game_status(self) -> dict:
         """
