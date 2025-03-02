@@ -1,4 +1,4 @@
-from games.utils.schemas import ThrowTriplet, Throw
+from games.utils.schemas import ThrowTriplet
 
 
 class CountdownGame:
@@ -21,7 +21,16 @@ class CountdownGame:
         self.throws: list[tuple[str, int]] = []  # List of (multiplier, value)
 
     def process_triplet(self, triplet: ThrowTriplet):
-        return
+        for throw in triplet:
+            score = throw.get_score()
+
+            # Things to consider at the start of each iteration:
+            # 1. Do I need to double in?
+            # 2. Is the score of this throw greater than the score I have left
+            # 3. Do I need to Double out?
+
+            if self.double_in and not self.in_play:
+                pass
 
     def throw(self, multiplier: str, value: int) -> bool:
         """Registers a throw if it's valid, updating the score accordingly."""
