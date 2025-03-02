@@ -1,0 +1,31 @@
+.
+├── DESIGN.md
+├── Dockerfile
+├── LICENSE
+├── README.md
+├── api
+│   ├── __init__.py
+│   ├── main.py
+│   ├── routers
+│   │   ├── __init__.py
+│   │   └── scores.py
+│   └── tests
+├── games
+│   ├── __init__.py
+│   ├── atw.py
+│   ├── countdown.py
+│   ├── cricket.py
+│   ├── scoring.py
+│   ├── tests
+│   │   └── __init__.py
+│   ├── utils
+│   │   ├── __init__.py
+│   │   ├── constants.py
+│   │   └── schemas.py
+├── notebooks
+│   ├── Untitled.ipynb
+│   ├── aroundtheworld.ipynb
+│   └── testing.ipynb
+
+
+12 directories, 42 files

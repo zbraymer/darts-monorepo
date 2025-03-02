@@ -7,7 +7,7 @@ select = ["ALL", "D101", "D102", "D103", "D106", "D107", "D419"]
 
 ignore = [
     "B008", "C901", "W191", "PD008", "PD901", "D", "ANN", "INP001", "S106", "EM", "TRY003", "I001",
-    "COM812", "S603", "S104", "S607", "RUF012", "TCH002", "TID252", "TRY004", "TD", "FIX002",
+    "COM812", "S603", "S104", "S607", "RUF012", "TCH002", "TID252", "TRY004", "TD", "FIX002", "FBT001", "FBT002"
     ]
 
 fixable = ["ALL"]
@@ -17,8 +17,7 @@ unfixable = ["B"]
 "__init__.py" = ["F401"]
 "**/tests/*.py" = ["D", "PLR2004", "S101"]
 "notebooks/**" = ["ALL"]
-"backend/**" = ["ALL"]
-"frontend/**" = ["ALL"]
+
 
 [lint.pylint]
 max-args = 7
