@@ -9,6 +9,7 @@ dependencies = [
     "games",
     "jupyterlab>=4.3.5",
     "pydantic>=2.10.6",
+    "pytest>=8.3.5",
     "requests>=2.32.3",
 ]
 
